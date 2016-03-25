@@ -1,0 +1,36 @@
+.center-nav {
+  width: 355px;
+  height: 50px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.pad {
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  border: 5px solid black;
+}
+
+.red {
+  border-top-left-radius: 100%;
+  background-color: red;
+}
+
+.yellow {
+  border-top-right-radius: 100%;
+  background-color: yellow;
+  margin-left: 50px;
+}
+
+.blue {
+  border-bottom-left-radius: 100%;
+  background-color: blue;
+}
+
+.green {
+  border-bottom-right-radius: 100%;
+  background-color: green;
+  margin-left: 50px;
+}

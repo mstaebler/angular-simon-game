@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular Simon Game</title>
+    
+    
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <div ng-app="simon">
+  <div ng-controller="simonController as sc" class="container-fluid">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div id="1" ng-click="buttonPress($event, 'red')" class="red pad"></div>
+        <div id="2" ng-click="buttonPress($event, 'yellow')" class="yellow pad"></div>
+      </div>
+      <!-- end row -->
+      <div class="row">
+        <div class="center-nav">
+          <span class="label label-default">{{count}}</span>
+          <div class="btn-group">
+            <button ng-click="start()" class="btn btn-default navbar-btn">start</button>
+            <button class="btn btn-default navbar-btn">{{strict}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="3" ng-click="buttonPress($event, 'blue')" class="blue pad"></div>
+        <div id="4" ng-click="buttonPress($event, 'green')" class="green pad"></div>
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end col -->
+    <div class="col-xs-4"></div>
+  </div>
+  <!-- end contianer-fluid -->
+</div>
+<!-- end app -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
