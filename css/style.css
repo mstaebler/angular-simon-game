@@ -5,7 +5,9 @@
   margin-bottom: 0;
   text-align: center;
 }
-
+.hide{
+  display:none;
+}
 .pad {
   height: 150px;
   width: 150px;

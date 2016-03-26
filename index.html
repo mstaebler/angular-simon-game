@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <title>Angular Simon Game</title>
-    
-    
+
+
     <link rel="stylesheet" href="css/reset.css">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
         <link rel="stylesheet" href="css/style.css">
 
-    
-    
-    
+
+
+
   </head>
 
   <body>
@@ -23,8 +23,8 @@
     <div class="col-xs-4"></div>
     <div class="col-xs-4">
       <div class="row">
-        <div id="1" ng-click="buttonPress($event, 'red')" class="red pad"></div>
-        <div id="2" ng-click="buttonPress($event, 'yellow')" class="yellow pad"></div>
+        <div id="1" ng-click="buttonPress(1)" style="background:{{red}}" class="red pad"></div>
+        <div id="2" ng-click="buttonPress(2)" style="background:{{yellow}}" class="yellow pad"></div>
       </div>
       <!-- end row -->
       <div class="row">
@@ -32,18 +32,24 @@
           <span class="label label-default">{{count}}</span>
           <div class="btn-group">
             <button ng-click="start()" class="btn btn-default navbar-btn">start</button>
+            <button ng-click="reset()" class="btn btn-default navbar-btn">reset</button>
             <button class="btn btn-default navbar-btn">{{strict}}</button>
           </div>
         </div>
       </div>
       <div class="row">
-        <div id="3" ng-click="buttonPress($event, 'blue')" class="blue pad"></div>
-        <div id="4" ng-click="buttonPress($event, 'green')" class="green pad"></div>
+        <div id="3" ng-click="buttonPress(3)" style="background:{{blue}}" class="blue pad"></div>
+        <div id="4" ng-click="buttonPress(4)" style="background:{{green}}" class="green pad"></div>
       </div>
       <!-- end row -->
     </div>
     <!-- end col -->
-    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+      <div class={{hide}}>
+        <h1>You Lost</h1>
+        <button ng-click="reset()">Restart</button>
+      </div>
+    </div>
   </div>
   <!-- end contianer-fluid -->
 </div>
@@ -53,8 +59,8 @@
 
         <script src="js/index.js"></script>
 
-    
-    
-    
+
+
+
   </body>
 </html>
