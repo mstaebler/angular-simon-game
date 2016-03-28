@@ -134,7 +134,7 @@ angular.module('simon', [])
             }
         };
 
-        scope.start = function() {
+        $scope.start = function() {
             if(newGame){
                 PlaySound(5);
             }
