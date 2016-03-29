@@ -7,7 +7,7 @@ angular.module('simon', [])
         $scope.yellow = "yellow";
         $scope.blue = "blue";
         $scope.green = "green";
-        //global variables
+        //variables
         var compMoves = [];
         var playerMoves = [];
         var gameover = false;
@@ -113,7 +113,7 @@ angular.module('simon', [])
             if(!gameover){
                 playerMoves = [];
                 $scope.count ++;
-                if($scope.count === 3){
+                if($scope.count === 21){
                     PlaySound(8);
                     $scope.reset();
                 }else{
