@@ -37,10 +37,11 @@
             <button ng-click="reset()" class="btn btn-default navbar-btn">reset</button>
             <audio id="audio6" src="http://www.soundjay.com/button/beep-07.wav" autostart="false" ></audio>
             <br>
+            <!-- TODO: disable (not hide) when not new game -->
             <button ng-click="switchMode()" class="btn btn-default navbar-btn">{{strict}}</button>
 
         </div>
-
+        <!-- TODO: use a foreach loop here to generate these four buttons  -->
         <div id="3" ng-click="buttonPress(3)" style="background:{{blue}}" class="blue pad"></div>
         <audio id="audio3" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" autostart="false" ></audio>
         <div id="4" ng-click="buttonPress(4)" style="background:{{green}}" class="green pad"></div>

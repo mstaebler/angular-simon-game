@@ -12,11 +12,13 @@ angular.module('simon', [])
         var playerMoves = [];
         var gameover = false;
         var time = 5000;
+        //TODO: rename, contents of array are not promises
         var promiseArr = [];
         var newGame = true;
 
         $scope.switchMode = function(){
             //only switch mode when game has not started
+            //TODO: remove conditional, wont be hit if ui element is disabled
             if(newGame){
                 $scope.strict = "normal" ? $scope.strict = "strict" : $scope.strict = "normal";
             }
@@ -30,6 +32,7 @@ angular.module('simon', [])
             else return null; //this line might not be necessary
         }
 
+        //TODO: Do not use id or class selectors. Defeats the purpose of using angular.
         function PlaySound(id) {
               var sound = document.getElementById('audio'+id);
               sound.play();
@@ -47,6 +50,9 @@ angular.module('simon', [])
         };
 
         //visual and auditory indication of a button being pressed
+        //TODO: Don't use a switch. It's clumsy. Repititious and unneccessary.
+        //TODO: Don't use ids hardcoded into the html. Generate the buttons by looping over an array of color strings.
+        //      Use index and value as parameters to this function.
         $scope.clickVisualEffect = function(id) {
             PlaySound(id);
             switch(id){
@@ -77,9 +83,11 @@ angular.module('simon', [])
             }
         };
 
+        //TODO: fix indentation in function
         var movePattern = function(){
             //1000ms delay between moves, keep going until all moves are shown
             var x = 0;
+            //TODO: define "move" function outside "movePattern"'s scope
             var move = function(){
                   var currentPos = compMoves[x];
                   $scope.clickVisualEffect(currentPos);
@@ -91,6 +99,7 @@ angular.module('simon', [])
             promiseArr[0] = $timeout(move,1000);
         };
 
+        //TODO: fix indentation in function
         $scope.buttonPress = function(id) {
               //add the players move to the playerMoves array
               playerMoves.push(id);
@@ -98,6 +107,7 @@ angular.module('simon', [])
               $scope.clickVisualEffect(id);
         };
 
+        //TODO: fix indentation in function
         $scope.nextMove = function() {
               //indicate game is in progress
               newGame = false;
@@ -105,6 +115,7 @@ angular.module('simon', [])
               compMoves.push(Math.floor(Math.random() * 4) + 1);
         };
 
+        //TODO: fix indentation in function
         var playerMoveCheck = function(){
             for(var i = 0; i<compMoves.length; i++){
                 //end game if player moves do not match comp moves
