@@ -7,34 +7,28 @@ angular.module('simon', [])
         $scope.yellow = "yellow";
         $scope.blue = "blue";
         $scope.green = "green";
+        $scope.Game = false;
         //variables
         var compMoves = [];
         var playerMoves = [];
         var gameover = false;
         var time = 5000;
-        //TODO: rename, contents of array are not promises
-        var promiseArr = [];
-        var newGame = true;
+        var timeoutIDs = [];
 
         $scope.switchMode = function(){
-            //only switch mode when game has not started
-            //TODO: remove conditional, wont be hit if ui element is disabled
-            if(newGame){
-                $scope.strict = "normal" ? $scope.strict = "strict" : $scope.strict = "normal";
-            }
+            $scope.strict === "normal" ? $scope.strict = "strict" : $scope.strict = "normal";
         };
-        //cancel all timeout promises
-        function cancelPromises(count){
-            if(count < promiseArr.length){
-                $timeout.cancel(promiseArr[count]);
-                return cancelPromises(count + 1);
+        //cancel all timeouts
+        function cancelTimeout(count){
+            if(count < timeoutIDs.length){
+                $timeout.cancel(timeoutIDs[count]);
+                return cancelTimeout(count + 1);
             }
-            else return null; //this line might not be necessary
         }
 
         //TODO: Do not use id or class selectors. Defeats the purpose of using angular.
         function PlaySound(id) {
-              var sound = document.getElementById('audio'+id);
+              var sound = document.getElementById('audio' + id);
               sound.play();
         }
         //reset all variables to starting values
@@ -45,8 +39,8 @@ angular.module('simon', [])
               playerMoves = [];
               gameover = false;
               time = 5000;
-              cancelPromises(0);
-              newGame = true;
+              cancelTimeout(0);
+              $scope.Game = false;
         };
 
         //visual and auditory indication of a button being pressed
@@ -82,37 +76,33 @@ angular.module('simon', [])
                     break;
             }
         };
+        var move = function(){
+            var x = 0;
+            var currentPos = compMoves[x];
+            $scope.clickVisualEffect(currentPos);
+            if(x < compMoves.length-1){
+                x++;
+                timeoutIDs[0] = $timeout(move,1000);
+            }
+        };
 
-        //TODO: fix indentation in function
         var movePattern = function(){
             //1000ms delay between moves, keep going until all moves are shown
-            var x = 0;
-            //TODO: define "move" function outside "movePattern"'s scope
-            var move = function(){
-                  var currentPos = compMoves[x];
-                  $scope.clickVisualEffect(currentPos);
-                  if(x < compMoves.length-1){
-                      x++;
-                      promiseArr[0] = $timeout(move,1000);
-                  }
-            };
-            promiseArr[0] = $timeout(move,1000);
+            timeoutIDs[0] = $timeout(move,1000);
         };
 
-        //TODO: fix indentation in function
         $scope.buttonPress = function(id) {
-              //add the players move to the playerMoves array
-              playerMoves.push(id);
-              //indicate the button press
-              $scope.clickVisualEffect(id);
+            //add the players move to the playerMoves array
+            playerMoves.push(id);
+            //indicate the button press
+            $scope.clickVisualEffect(id);
         };
 
-        //TODO: fix indentation in function
         $scope.nextMove = function() {
-              //indicate game is in progress
-              newGame = false;
+            //indicate game is in progress
+            $scope.Game = true;
 
-              compMoves.push(Math.floor(Math.random() * 4) + 1);
+            compMoves.push(Math.floor(Math.random() * 4) + 1);
         };
 
         //TODO: fix indentation in function
@@ -140,13 +130,13 @@ angular.module('simon', [])
                 PlaySound(9);
                 playerMoves = [];
                 movePattern();
-                promiseArr[1] = $timeout(playerMoveCheck,time);
+                timeoutIDs[1] = $timeout(playerMoveCheck,time);
                 }
             }
         };
 
         $scope.start = function() {
-            if(newGame){
+            if(!$scope.Game){
                 PlaySound(5);
             }
             //choose a button to press add it to the end of the moves array
@@ -154,6 +144,6 @@ angular.module('simon', [])
             //press that button plus any previous ones
             movePattern();
             //check player moves after an increasing delay
-            promiseArr[2] = $timeout(playerMoveCheck,time);
+            timeoutIDs[2] = $timeout(playerMoveCheck,time);
         };
     }]);
